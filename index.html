@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ResQ - Emergency Response</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="navbar">
+
+        <div class="logo">
+
+            <span>🚑</span> ResQ
+
+        </div>
+
+
+        <nav>
+
+            <button onclick="showPage('home')">
+                Home
+            </button>
+
+            <button onclick="showPage('history')">
+                History
+            </button>
+
+            <button onclick="showPage('profile')">
+                Profile
+            </button>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- ================= HOME PAGE ================= -->
+
+    <main id="home" class="page active">
+
+
+        <section class="hero">
+
+
+            <div class="hero-content">
+
+                <p class="tagline">
+                    Emergency Response System
+                </p>
+
+
+                <h1>
+
+                    Help when you
+
+                    <span>
+                        need it most.
+                    </span>
+
+                </h1>
+
+
+                <p class="description">
+
+                    ResQ connects you with nearby emergency
+                    assistance including ambulances, fire
+                    brigades, police and rescue services.
+
+                </p>
+
+
+                <div class="location-status">
+
+                    <span class="location-dot"></span>
+
+                    <span id="locationText">
+
+                        Location not detected
+
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ================= SOS CARD ================= -->
+
+            <div class="sos-card">
+
+                <p>
+                    Emergency?
+                </p>
+
+
+                <button
+                    class="sos-button"
+                    onclick="startEmergency()"
+                >
+
+                    <span>🚨</span>
+
+                    SOS
+
+                </button>
+
+
+                <p class="sos-help">
+
+                    Press to request emergency assistance
+
+                </p>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ================= QUICK ACTIONS ================= -->
+
+        <section class="quick-actions">
+
+
+            <div
+                class="action-card"
+                onclick="detectLocation()"
+            >
+
+                <div class="action-icon">
+                    📍
+                </div>
+
+                <h3>
+                    My Location
+                </h3>
+
+                <p>
+                    Detect your current location
+                </p>
+
+            </div>
+
+
+
+            <div
+                class="action-card"
+                onclick="showPage('history')"
+            >
+
+                <div class="action-icon">
+                    📜
+                </div>
+
+                <h3>
+                    Emergency History
+                </h3>
+
+                <p>
+                    View previous emergencies
+                </p>
+
+            </div>
+
+
+
+            <div
+                class="action-card"
+                onclick="showPage('profile')"
+            >
+
+                <div class="action-icon">
+                    👨‍👩‍👧
+                </div>
+
+                <h3>
+                    Emergency Contacts
+                </h3>
+
+                <p>
+                    Manage your emergency contacts
+                </p>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- ================= EMERGENCY PAGE ================= -->
+
+    <main id="emergency" class="page">
+
+
+        <section class="emergency-container">
+
+
+            <div class="page-heading">
+
+                <span class="danger-icon">
+                    🚨
+                </span>
+
+
+                <div>
+
+                    <h1>
+                        Emergency Request
+                    </h1>
+
+                    <p>
+                        Provide information to help responders.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ================= LOCATION ================= -->
+
+            <div class="info-box">
+
+
+                <div class="info-icon">
+                    📍
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Your Location
+                    </strong>
+
+
+                    <p id="emergencyLocation">
+                        Detecting location...
+                    </p>
+
+
+                    <small id="locationAccuracy">
+                        Accuracy: Not available
+                    </small>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ================= FORM ================= -->
+
+            <div class="form-card">
+
+
+                <!-- Emergency Type -->
+
+                <label>
+                    Emergency Type
+                </label>
+
+
+                <select id="emergencyType">
+
+
+                    <option value="Road Accident">
+                        🚗 Road Accident
+                    </option>
+
+
+                    <option value="Medical Emergency">
+                        🏥 Medical Emergency
+                    </option>
+
+
+                    <option value="Injury">
+                        🩹 Injury
+                    </option>
+
+
+                    <option value="Fire">
+                        🔥 Fire / Fire Accident
+                    </option>
+
+
+                    <option value="Crime">
+                        🚓 Crime / Security Emergency
+                    </option>
+
+
+                    <option value="Rescue">
+                        🆘 Rescue Emergency
+                    </option>
+
+
+                    <option value="Natural Disaster">
+                        🌪️ Natural Disaster
+                    </option>
+
+
+                    <option value="Other">
+                        ⚠️ Other Emergency
+                    </option>
+
+
+                </select>
+
+
+
+                <!-- ================= REQUIRED SERVICES ================= -->
+
+                <label>
+                    Required Emergency Services
+                </label>
+
+
+                <p class="service-help">
+
+                    Select one or more services that may be
+                    required at the emergency location.
+
+                </p>
+
+
+                <div class="service-options">
+
+
+                    <label class="service-option">
+
+                        <input
+                            type="checkbox"
+                            name="services"
+                            value="Ambulance"
+                        >
+
+                        <span class="service-icon">
+                            🚑
+                        </span>
+
+                        <span>
+                            Ambulance
+                        </span>
+
+                    </label>
+
+
+
+                    <label class="service-option">
+
+                        <input
+                            type="checkbox"
+                            name="services"
+                            value="Fire Brigade"
+                        >
+
+                        <span class="service-icon">
+                            🚒
+                        </span>
+
+                        <span>
+                            Fire Brigade
+                        </span>
+
+                    </label>
+
+
+
+                    <label class="service-option">
+
+                        <input
+                            type="checkbox"
+                            name="services"
+                            value="Police"
+                        >
+
+                        <span class="service-icon">
+                            🚓
+                        </span>
+
+                        <span>
+                            Police
+                        </span>
+
+                    </label>
+
+
+
+                    <label class="service-option">
+
+                        <input
+                            type="checkbox"
+                            name="services"
+                            value="Rescue Team"
+                        >
+
+                        <span class="service-icon">
+                            🆘
+                        </span>
+
+                        <span>
+                            Rescue Team
+                        </span>
+
+                    </label>
+
+
+                </div>
+
+
+
+                <!-- ================= DESCRIPTION ================= -->
+
+                <label>
+                    Description
+                </label>
+
+
+                <textarea
+                    id="description"
+                    placeholder="Describe the emergency..."
+                ></textarea>
+
+
+
+                <!-- ================= PEOPLE INVOLVED ================= -->
+
+                <label>
+                    People Involved
+                </label>
+
+
+                <input
+                    type="number"
+                    id="peopleCount"
+                    min="0"
+                    placeholder="Approximate number of people"
+                >
+
+
+
+                <!-- ================= CAMERA ================= -->
+
+                <label>
+                    Accident / Incident Photo
+                </label>
+
+
+                <div class="upload-box">
+
+
+                    <input
+                        type="file"
+                        id="photo"
+                        accept="image/*"
+                        capture="environment"
+                        onchange="previewPhoto()"
+                    >
+
+
+                    <div id="photoPreview">
+
+                        📸 Capture incident photo
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- ================= TIME ================= -->
+
+                <div class="incident-time">
+
+                    🕐
+
+                    <strong>
+                        Incident Time:
+                    </strong>
+
+                    <span id="incidentTime">
+                        Not captured
+                    </span>
+
+                </div>
+
+
+
+                <!-- ================= SEND ================= -->
+
+                <button
+                    class="send-button"
+                    onclick="sendEmergency()"
+                >
+
+                    🚨 SEND EMERGENCY REQUEST
+
+                </button>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- ================= SEARCHING PAGE ================= -->
+
+    <main id="searching" class="page">
+
+
+        <section class="status-container">
+
+
+            <div class="loading-circle">
+                🚨
+            </div>
+
+
+            <h1>
+                Finding Emergency Services
+            </h1>
+
+
+            <p>
+
+                ResQ is searching for available
+                emergency responders near you.
+
+            </p>
+
+
+            <div class="search-status">
+
+
+                <div class="status-item completed">
+
+                    <span>✓</span>
+
+                    Emergency request received
+
+                </div>
+
+
+                <div class="status-item completed">
+
+                    <span>✓</span>
+
+                    Location shared
+
+                </div>
+
+
+                <div
+                    class="status-item completed"
+                    id="serviceStatus"
+                >
+
+                    <span>✓</span>
+
+                    Required services identified
+
+                </div>
+
+
+                <div class="status-item">
+
+                    <span>⏳</span>
+
+                    Searching nearby responders
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- ================= TRACKING PAGE ================= -->
+
+    <main id="tracking" class="page">
+
+
+        <section class="tracking-container">
+
+
+            <div class="tracking-header">
+
+
+                <div>
+
+                    <p class="status-label">
+                        EMERGENCY ACTIVE
+                    </p>
+
+
+                    <h1 id="trackingTitle">
+                        Emergency responders are on the way 🚨
+                    </h1>
+
+                </div>
+
+
+                <div class="eta">
+
+                    <span>
+                        ETA
+                    </span>
+
+                    <strong id="eta">
+                        7 min
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- ================= MAP ================= -->
+
+            <div class="map">
+
+
+                <div class="map-road road-one"></div>
+
+                <div class="map-road road-two"></div>
+
+
+                <div class="map-marker user-marker">
+
+                    📍
+
+                    <span>
+                        You
+                    </span>
+
+                </div>
+
+
+                <div
+                    id="ambulanceMarker"
+                    class="map-marker ambulance-marker"
+                >
+
+                    🚑
+
+                    <span>
+                        Ambulance
+                    </span>
+
+                </div>
+
+
+                <div
+                    id="fireMarker"
+                    class="map-marker fire-marker"
+                >
+
+                    🚒
+
+                    <span>
+                        Fire Brigade
+                    </span>
+
+                </div>
+
+
+                <div
+                    id="policeMarker"
+                    class="map-marker police-marker"
+                >
+
+                    🚓
+
+                    <span>
+                        Police
+                    </span>
+
+                </div>
+
+
+                <div
+                    id="rescueMarker"
+                    class="map-marker rescue-marker"
+                >
+
+                    🆘
+
+                    <span>
+                        Rescue Team
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- ================= RESPONDER DETAILS ================= -->
+
+            <div
+                id="responderCards"
+                class="responder-cards"
+            >
+
+            </div>
+
+
+
+            <!-- ================= HOSPITAL ALERT ================= -->
+
+            <div
+                id="hospitalAlert"
+                class="hospital-alert"
+            >
+
+                <span>
+                    🏥
+                </span>
+
+
+                <div>
+
+                    <strong>
+                        Hospital Pre-Alert Sent
+                    </strong>
+
+
+                    <p>
+
+                        The receiving hospital has been
+                        notified because medical assistance
+                        was requested.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- ================= HISTORY ================= -->
+
+    <main id="history" class="page">
+
+
+        <section class="history-container">
+
+
+            <h1>
+                Emergency History
+            </h1>
+
+
+            <p class="section-description">
+
+                Your previous emergency requests.
+
+            </p>
+
+
+            <div id="historyList">
+
+
+                <div class="empty-history">
+
+                    📜
+
+                    <h3>
+                        No emergencies yet
+                    </h3>
+
+
+                    <p>
+                        Your emergency requests will appear here.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- ================= PROFILE ================= -->
+
+    <main id="profile" class="page">
+
+
+        <section class="profile-container">
+
+
+            <div class="profile-avatar">
+                👤
+            </div>
+
+
+            <h1>
+                Your Profile
+            </h1>
+
+
+            <div class="profile-card">
+
+
+                <label>
+                    Name
+                </label>
+
+
+                <input
+                    type="text"
+                    placeholder="Your name"
+                >
+
+
+                <label>
+                    Phone
+                </label>
+
+
+                <input
+                    type="tel"
+                    placeholder="Your phone number"
+                >
+
+
+                <label>
+                    Emergency Contact
+                </label>
+
+
+                <input
+                    type="tel"
+                    placeholder="Emergency contact"
+                >
+
+
+                <button class="save-button">
+
+                    Save Profile
+
+                </button>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- ================= TOAST ================= -->
+
+    <div
+        id="toast"
+        class="toast"
+    ></div>
+
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
